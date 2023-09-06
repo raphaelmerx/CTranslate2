@@ -247,7 +247,7 @@ class BartLoader(ModelLoader):
         spec = transformer_spec.TransformerSpec.from_config(
             (model.config.encoder_layers, model.config.decoder_layers),
             model.config.encoder_attention_heads,
-            pre_norm=model.config.normalize_before,
+            pre_norm=getattr(model.config, "normalize_before", False),
             activation=_SUPPORTED_ACTIVATIONS[model.config.activation_function],
             layernorm_embedding=getattr(model.config, "normalize_embedding", True),
         )
